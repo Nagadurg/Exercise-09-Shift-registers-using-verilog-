@@ -41,39 +41,77 @@ FIGURE-04
 A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts as a delay element.
 
 ### Procedure
-/* write all the steps invloved */
+1.Use quartus software and import required modules.
 
+2.Assign inputs and outputs for shift registers.
 
+3.Assign logic for input to give output at positive edge.
+
+4.Perform opertaions and produce rtl circuit.
 
 ### PROGRAM 
 /*
 Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: 
-RegisterNumber:  
+Developed by:Chevula.Nagadurga
+RegisterNumber:212221230014 
 */
+```
+## SIPO:
+module SIPO(c,si,po);
+input c,si;
+output [7:0] po;
+reg [7:0] temp;
+always @ (posedge c)
+begin
+temp = {temp[6:0],si};
+end
+assign po = temp;
+endmodule 
 
+## PISO:
+mmodule PISO(Clk,Pin,load,so);
+input load,Clk;
+input [3:0] Pin;
+output reg so;
+reg [3:0] temp;
+always @ (posedge Clk)
+begin 
+if(load)
+temp <= Pin;
+else
+begin
+so<=temp[3];
+temp <={temp[2:0],1'b0};
+end
+end
+endmodule
 
-
-
-
-
+## PIPO:
+module PIPO (Pi,Clk,Po);
+input Clk;
+input [3:0]Pi;
+output reg[3:0]Po;
+always@(posedge Clk)
+begin
+Po=Pi;
+end 
+endmodule
+```
 ### RTL LOGIC  REGISTERS   
-
-
-
-
-
-
-
-
+## SIPO
+![output](./9.1.png)
+## PISO:
+![output](./9.2.png)
+## PIPO:
+![output](./9.3.png)
 
 ### TIMING DIGRAMS FOR SHIFT REGISTERS
-
-
-
-
-
-
-
+## SIPO:
+![output](./9.4.png)
+## PISO:
+![output](./9.5.png)
+## PIPO:
+![output](./9.6.png)
 
 ### RESULTS 
+Hence SIPO,PISO and PIPO are implemented using verilog programming and their functionality is validated successfully.
